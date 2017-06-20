@@ -1,0 +1,166 @@
+body { 
+	position: relative;
+	background-color: #F5F5F5;
+	font-family: Verdana, Geneva, Arial, sans-serif;
+	//line-height: 180%;
+}	
+
+.content{
+	margin-top: 20px;
+	margin-left: 100px;
+	margin-bottom: 100px;
+}
+
+#espace{
+	width: 400px;
+	height: 20px;
+	background-color: black;
+
+}
+
+#espace .espace1{
+	margin-left:400px;
+	width: 400px;
+	height: 20px;
+	background-color: red;
+}
+
+#espace .espace1:hover{
+	background-color: white;
+}
+
+#espace .espace2{
+	margin-left:400px;
+	width: 400px;
+	height: 20px;
+	background-color: green;
+}
+
+footer {
+   position: fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   background:#122;
+}
+
+.pos{
+	margin-top: 10px;
+	margin-left: 180px;
+}
+
+h1.Gtitre{
+	width: 500px;
+	text-align: center;
+	background-color: #2F4F4F;
+	color: white;
+}
+
+h2{
+	color: #008080;
+}
+
+.maForm{	
+		width: 400px;
+		
+		margin-top: 20px;
+		margin-bottom: 20px;
+}
+
+#monForm {
+	float: left;
+}
+
+#liste {
+
+		width: 400px;
+		margin-bottom: 20px;
+		margin-left: 400px;
+}
+
+#resultat-rech{
+	margin: 0 10px 0 0;
+	padding-left: 10px;
+	background-color: white;
+	box-shadow: 10px 10px 20px gray;
+	border-radius: 5px;
+	border: solid 1px #b4b4b4;
+}
+
+#resultat-rech h3{
+	color: #2E8B57;
+}
+
+
+.resultat{
+	clear: left;
+	width: 400px;
+	margin-top: 80px;
+}
+
+.resultat h3{
+	color:  #008080;
+}
+
+#liste table {
+width: 25em;
+border-collapse: separate;
+border-spacing: 2px;
+overflow: scroll;
+
+}
+
+#liste tr:first-child {
+background: #FFFAFA;
+color: #20B2AA;
+}
+
+#liste td, th {
+padding: 6px 12px;
+}
+
+#liste th {
+text-align: left;
+}
+
+#liste table td:empty {
+background: #BC8F8F;
+}
+
+#liste table tr + tr:hover {
+background: #bbb;
+color:white;
+}
+
+#liste table tr + tr td:hover, table tr + tr th:hover {
+background: #777;
+}
+
+a:link {
+	color: #2E8B57;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #FF6347;
+	text-decoration: underline;
+}
+	
+
+ul { 
+	list-style-image: url(../img/test.gif);
+}
+
+
+b,
+strong {
+  font-weight: bold;
+}
+
+::selection {
+background: yellow; 
+}
+::-moz-selection {
+background: yellow; 
+}

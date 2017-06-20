@@ -1,0 +1,27 @@
+<% include head %>
+
+<h1 class="Gtitre">Chercher un étudiant</h1>
+<div class="content">
+<form id="monForm">
+	<div class="input-group">
+		<label for="basic-url">Recherche par l'identifiant </label>
+		<input type="text" id="ident" class="form-control">
+		<br />
+		<label for="basic-url"> par le nom </label>
+		<input type="text" id="nom" class="form-control">
+		<br />
+		<input type="submit" value="Rechercher" class="btn pos btn-primary">
+	</div>
+ </form>
+
+ <div class="resultat">
+ <h3>Résultat de recherche</h3>
+ <div id="resultat-rech"></div>
+ </div>
+ </div>
+
+
+ <script src="js/rech.js"></script>
+ 
+<% include footer %>
+
