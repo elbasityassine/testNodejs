@@ -164,3 +164,18 @@ background: yellow;
 ::-moz-selection {
 background: yellow; 
 }
+
+@media screen and (max-width: 420px){
+	
+#espace .espace1{
+	margin-left:40px;
+	width: 80px;
+	height: 20px;
+}
+
+#espace .espace2{
+	margin-left:40px;
+	width: 80px;
+	height: 20px;
+}	
+}
