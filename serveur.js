@@ -76,7 +76,6 @@ io.sockets.on("connection", function(socket){
 		if(data.type == "id"){
 			for(var i=0; i<ficheInfo.length; i++){
 				if(ficheInfo[i].id == data.value){
-					console.log(data.type);
 					socket.emit("resultRecherche", ficheInfo[i]);
 					flag = true;
 				}
