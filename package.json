@@ -1,0 +1,19 @@
+{
+	"name": "ProjetFinal-Express",
+	"version": "0.0.1",
+	"private": true,
+	"main": "serveur.js",
+	"scripts": 
+	{
+		"start": "nodemon serveur.js"
+	},
+
+	"author": "ELBASIT Yassine",
+	"dependencies": 
+	{
+	    "express": "^4.15.2",
+		"ejs": "*",
+		"morgan": "^1.8.1",
+		"body-parser": "^1.17.1"
+	}
+}
