@@ -4,6 +4,8 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum=1.0, width=device-width" />
  <script src="lib/jquery-3.2.0.min.js"></script>
+ <script src="/socket.io/socket.io.js"></script>
+ <script src="js/client.js"></script>
 </head>
 <body>
 
@@ -16,7 +18,7 @@
 
         <ul class="nav navbar-nav">
             <li><a href="/">index</a></li>
-            <li><a href="/inscrire">Inscrire un étudiant</a></li>
+            <li><a href="/inscrire" id="inscrit">Inscrire un étudiant</a></li>
             <li><a href="/chercher">Chercher un étudiant</a></li>
             <li><a href="/portofolio">Portofolio</a></li>
         </ul>
