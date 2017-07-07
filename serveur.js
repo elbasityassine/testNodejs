@@ -32,6 +32,7 @@ app.get('/', function (req, res) {
  res.render('index.ejs');
 });
 
+
 // Partie les routes
 
 var inscrire = require('./routes/inscrire');
