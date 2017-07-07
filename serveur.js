@@ -6,9 +6,12 @@ var morgan = require('morgan');
 var path = require('path');
 var fs = require('fs');
 
-app.use(express.static(path.join(__dirname, 'public')));
-var port = process.env.PORT || process.env.port || process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var server = require("http").createServer(app);
+var io = require("socket.io").listen(server); 
 
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('port', (process.env.PORT || 80));
+app.set('host', (process.env.HOST || '127.0.0.1'));
 
 
 // express utilise le parseur json
@@ -32,7 +35,6 @@ app.get('/', function (req, res) {
  res.render('index.ejs');
 });
 
-
 // Partie les routes
 
 var inscrire = require('./routes/inscrire');
@@ -46,52 +48,53 @@ app.use('/chercher', chercher);
 app.use('/portofolio', portofolio);
 app.use('/telechargement', download);
 
-// partie ajax et express
-
+function Personne(id, nom, prenom){
+	if(arguments.length == 3){
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+	}
+}
 
 var ficheInfo = [ 
-{
-	id : 1,
-	nom : "ELBASIT",
-	prenom : "Yassine"
-},
-{
-	id : 2,
-	nom : "Mohamed",
-	prenom : "Chekroud"
-}
-];
+					new Personne(1, "ELBASIT", "Yassine"),
+					new Personne(2, "Chekroud", "Mohammed")
+				];
 
-app.get('/api/affiche', function(req, res) {
-	if (req.query.limit >= 0) {
-		res.json(ficheInfo.slice(0, req.query.limit));
-	} else {
-		res.json(ficheInfo);
-	}
-});
-
-app.post('/api/formulaire', function(req, res) {
-	monPerso = req.body;
-	monPerso.id = 1 + ficheInfo.length
-	ficheInfo.push(monPerso);
-	res.send();
-});
-
-app.get('/api/affiche/:data', function(req, res) {
-	var flag = false;
-	var dataMin = req.params.data.toLowerCase();
-	for (var i = 0; i < ficheInfo.length; i++) {
-		var nomMIN = ficheInfo[i].nom.toLowerCase();
-		if (ficheInfo[i].id == req.params.data || nomMIN == dataMin) {
-			flag = true;
-			res.json(ficheInfo[i]);
+io.sockets.on("connection", function(socket){
+	
+	socket.on("inscrit", function(data){
+		let id = 1 + ficheInfo.length;
+		let monPerso = new Personne(id, data.nom, data.prenom);
+		ficheInfo.push(monPerso);
+		io.emit("affiche", ficheInfo);
+	});
+	
+	socket.on("recherche", function(data){
+		let flag = false;
+		
+		if(data.type == "id"){
+			for(var i=0; i<ficheInfo.length; i++){
+				if(ficheInfo[i].id == data.value){
+					console.log(data.type);
+					socket.emit("resultRecherche", ficheInfo[i]);
+					flag = true;
+				}
+			}
 		}
-	}
-	if (!flag) {
-		res.json({
-			stat : 'no'
-		});
-	}
+		else if(data.type == "nom"){
+			for(var i=0; i<ficheInfo.length; i++){
+				if(ficheInfo[i].nom.toLowerCase() == data.value.toLowerCase()){
+					socket.emit("resultRecherche", ficheInfo[i]);
+					flag = true;
+				}
+			}
+		}
+		
+		if(!flag){
+			socket.emit("resultRecherche", null);
+		}
+	});
 });
 
 app.use(function(req, res, next) {
@@ -99,6 +102,4 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.listen(port, function () {
-  console.log('Démarage du serveur: ' + app.get('host') + ':' + app.get('port') + '/');
-});
+server.listen(app.get('port'));
